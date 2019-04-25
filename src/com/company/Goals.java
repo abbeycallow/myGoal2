@@ -13,6 +13,7 @@ public class Goals {
     String userChoice;
     // creating scanner to take in input from user
     Scanner scanner = new Scanner(System.in);
+    String name;
 
 
     public void goals() throws IOException {
@@ -20,6 +21,8 @@ public class Goals {
         do {
             //showing the menu for GOALS and inputing info 1/2 to direct you to where in the app u want to go
             System.out.println(" ----YOUR GOALS----");
+            System.out.println("Please enter your name : ");
+            name = scanner.nextLine();
             System.out.println("Would you like to create a new goal? Press 1");
             System.out.println("would you like to view your goal? press 2");
             System.out.println("Save and start over? press 3");
@@ -30,15 +33,15 @@ public class Goals {
             switch (Integer.parseInt(userChoice)) {
 
                 case 1:
-                  createGoal();
+                  createGoal(name);
                     break;
 
                 case 2:
-                    viewGoal();
+                    viewGoal(name);
                     break;
 
                 case 3:
-                   createGoal();
+                   createGoal(name);
                     break;
             }
         }
@@ -47,10 +50,10 @@ public class Goals {
 
     }
 
-        private void createGoal() throws IOException {
+        private void createGoal(String name) throws IOException {
             //creating a file and making sure the info saves to the file even if
             //you create a new goal or exit app
-            BufferedWriter buffer = new BufferedWriter(new FileWriter("goals.txt", true));
+            BufferedWriter buffer = new BufferedWriter(new FileWriter(name +".txt", true));
             String userInput;
 
             //this next portion takes in user input and answers the questions that are prompted
@@ -92,10 +95,10 @@ public class Goals {
             buffer.close();
         }
 
-        private void viewGoal() throws IOException {
+        private void viewGoal(String name) throws IOException {
             //user able to see their goals
             System.out.println("\n YOUR  GOALS : ");
-            FileReader file = new FileReader("goals.txt");
+            FileReader file = new FileReader(name + ".txt");
             BufferedReader buffer = new BufferedReader(file);
 
             //this loop files the char and prints them to screen.
